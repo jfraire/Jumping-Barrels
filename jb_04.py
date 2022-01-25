@@ -3,6 +3,7 @@ import pgzrun
 WIDTH = 350
 HEIGHT = 256
 
+bg_pos = 0
 BGSPEED = 1
 
 FLOOR = HEIGHT-16
@@ -10,12 +11,9 @@ FLOOR = HEIGHT-16
 GRAVITY = 2
 JUMP = 16
 
-# Voici le fond
-bground = Actor('city_background_night_small', topleft=(0,0))
-
 def update_background():
-    """Change la position du fond de la scène"""
-    bground.left -= BGSPEED
+    global bg_pos
+    bg_pos = bg_pos - BGSPEED
 
 # Un héros
 running_costumes = [
@@ -67,7 +65,7 @@ def update():
     update_hero()
 
 def draw():
-    bground.draw()
+    screen.blit('city_background_night_small', (bg_pos, 0))
     hero.draw()
 
 pgzrun.go()

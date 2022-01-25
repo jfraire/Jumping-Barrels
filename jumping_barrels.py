@@ -5,6 +5,7 @@ import sys
 WIDTH = 350
 HEIGHT = 256
 
+bg_pos = 0
 BGSPEED = 1
 
 FLOOR = HEIGHT-16
@@ -18,12 +19,9 @@ LIVES = 6
 
 music.play('awesomeness')
 
-# Voici le fond
-bground = Actor('city_background_night_small', topleft=(0,0))
-
 def update_background():
-    """Change la position du fond de la scène"""
-    bground.left -= BGSPEED
+    global bg_pos
+    bg_pos = bg_pos - BGSPEED
 
 # Un héros
 running_costumes = [
@@ -97,7 +95,7 @@ def show_lives_and_points():
 
 # Arrêt le jeux
 def stop_game():
-    if hero.lives < 1 or bground.right < WIDTH:
+    if hero.lives < 1 or bg_pos < -2048:
         print('Game over : '+str(len(jumped_barrels)))
         sys.exit()
 
@@ -111,7 +109,7 @@ def update():
     stop_game()
 
 def draw():
-    bground.draw()
+    screen.blit('city_background_night_small', (bg_pos, 0))
     hero.draw()
     for barrel in barrels:
         barrel.draw()
