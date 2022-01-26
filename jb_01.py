@@ -3,19 +3,22 @@ import pgzrun
 WIDTH = 350
 HEIGHT = 256
 
-bg_pos = 0
 BGSPEED = 1
 
+# Voici le fond
+background = dict()
+background['position'] = 0
+background['night'] = 'city_background_night_small'
+
 def update_background():
-    global bg_pos
-    bg_pos = bg_pos - BGSPEED
+    background['position'] -= BGSPEED
 
 # 'hooks' de pygame zero
 def update():
     update_background()
 
 def draw():
-    screen.blit('city_background_night_small', (bg_pos, 0))
+    screen.blit(background['night'], (background['position'], 0))
 
 pgzrun.go()
 

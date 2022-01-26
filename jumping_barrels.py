@@ -19,9 +19,13 @@ LIVES = 6
 
 music.play('awesomeness')
 
+# Voici le fond
+background = dict()
+background['position'] = 0
+background['night'] = 'city_background_night_small'
+
 def update_background():
-    global bg_pos
-    bg_pos = bg_pos - BGSPEED
+    background['position'] -= BGSPEED
 
 # Un héros
 running_costumes = [
@@ -109,7 +113,7 @@ def update():
     stop_game()
 
 def draw():
-    screen.blit('city_background_night_small', (bg_pos, 0))
+    screen.blit(background['night'], (background['position'], 0))
     hero.draw()
     for barrel in barrels:
         barrel.draw()
